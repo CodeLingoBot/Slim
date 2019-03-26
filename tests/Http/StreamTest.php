@@ -150,9 +150,5 @@ class StreamTest extends \PHPUnit_Framework_TestCase
      *
      * @see StreamTest::pipeStream
      */
-    private function openPipeStream()
-    {
-        $this->pipeFh = popen('echo 12', 'r');
-        $this->pipeStream = new Stream($this->pipeFh);
-    }
+    
 }

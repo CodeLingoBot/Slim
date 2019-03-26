@@ -217,8 +217,5 @@ class Error extends AbstractError
      * @param  string $content
      * @return string
      */
-    private function createCdataSection($content)
-    {
-        return sprintf('<![CDATA[%s]]>', str_replace(']]>', ']]]]><![CDATA[>', $content));
-    }
+    
 }

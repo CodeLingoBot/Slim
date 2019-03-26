@@ -82,23 +82,7 @@ class Container extends PimpleContainer implements ContainerInterface
      *
      * @return void
      */
-    private function registerDefaultServices($userSettings)
-    {
-        $defaultSettings = $this->defaultSettings;
-
-        /**
-         * This service MUST return an array or an
-         * instance of \ArrayAccess.
-         *
-         * @return array|\ArrayAccess
-         */
-        $this['settings'] = function () use ($userSettings, $defaultSettings) {
-            return new Collection(array_merge($defaultSettings, $userSettings));
-        };
-
-        $defaultProvider = new DefaultServicesProvider();
-        $defaultProvider->register($this);
-    }
+    
 
     /********************************************************************************
      * Methods to satisfy Psr\Container\ContainerInterface
@@ -142,12 +126,7 @@ class Container extends PimpleContainer implements ContainerInterface
      *
      * @return bool
      */
-    private function exceptionThrownByContainer(\InvalidArgumentException $exception)
-    {
-        $trace = $exception->getTrace()[0];
-
-        return $trace['class'] === PimpleContainer::class && $trace['function'] === 'offsetGet';
-    }
+    
 
     /**
      * Returns true if the container can return an entry for the given identifier.

@@ -1554,34 +1554,7 @@ class AppTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('', $response->getBody()->__toString());
     }
 
-    private function getAppForTestingRunMethod($method = 'GET')
-    {
-        $app = new App();
-
-        // Prepare request and response objects
-        $env = Environment::mock([
-            'SCRIPT_NAME' => '/index.php',
-            'REQUEST_URI' => '/foo',
-            'REQUEST_METHOD' => $method,
-        ]);
-        $uri = Uri::createFromEnvironment($env);
-        $headers = Headers::createFromEnvironment($env);
-        $cookies = [];
-        $serverParams = $env->all();
-        $body = new Body(fopen('php://temp', 'r+'));
-        $req = new Request($method, $uri, $headers, $cookies, $serverParams, $body);
-        $res = new Response(StatusCode::HTTP_OK, null, $body);
-        $app->getContainer()['request'] = $req;
-        $app->getContainer()['response'] = $res;
-
-        $app->get('/foo', function ($req, $res) {
-            $res->getBody()->write('bar');
-
-            return $res;
-        });
-
-        return $app;
-    }
+    
 
     public function testRespond()
     {
